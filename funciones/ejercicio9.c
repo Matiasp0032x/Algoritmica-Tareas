@@ -102,7 +102,7 @@ void serieE(){
         vector[3] = aux;
         printf("\n");
     }
-    
+
 }
 
 int main()
