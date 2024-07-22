@@ -1,39 +1,56 @@
 /*Encontrar el producto de las matrices Q[m,n] y P[n,m].*/
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-void cargar(int matriz[100][100], int m, int n){
-    printf("Ingrese los elementos de la matriz %dx%d:\n", m, n);
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++)
-            scanf("%d", &matriz[i][j]);
-    }
-}
-
-void producto(int Q[100][100], int P[100][100], int m, int n){
-    int R[m][n];
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++)
-            R[i][j] = P[i][j]*Q[i][j];
-    }
-    
-    printf("El producto de las matrices es:\n");
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++)
-            printf("%d ", R[i][j]);
+void cargar(int filas, int columnas, int matriz[filas][columnas]) {
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            matriz[i][j] = rand() % 100;
+            printf("%2d ", matriz[i][j]);
+        }
         printf("\n");
     }
 }
 
-int main()
-{
-    int m,n;
+void producto(int m, int n, int P[n][m], int Q[m][n]) {
+    int R[m][m];
+
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < m; j++) {
+            R[i][j] = 0;
+        }
+    }
+
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < m; j++) {
+            for (int k = 0; k < n; k++)
+                R[i][j] += Q[i][k] * P[k][j];
+        }
+    }
+
+    printf("El producto de las matrices es:\n");
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < m; j++)
+            printf("%5d ", R[i][j]);
+        printf("\n");
+    }
+}
+
+int main() {
+    srand(time(NULL));
+    int m, n;
     printf("Ingrese el numero de filas y columnas de las matrices: ");
     scanf("%d %d", &m, &n);
-    
-    int Q[m][n], P[m][n];
-    cargar(Q, m, n);
-    cargar(P, m, n);
-    producto(Q, P, m, n);
+
+    int Q[m][n], P[n][m];
+
+    cargar(m, n, Q);
+    printf("\n");
+    cargar(n, m, P);
+    printf("\n");
+    producto(m, n, P, Q);
+
     return 0;
 }

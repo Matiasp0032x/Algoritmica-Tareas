@@ -14,7 +14,7 @@ Vector Z
 
 void transformando_a_vectorZ(int n, int A[n][n]){
     int Z[n*n], cont = 0;
-    int direction = -1; // 1: moving down-right, -1: moving up-left
+    int direction = -1; 
     
     for (int k = 0; k < 2 * n - 1; k++) {
         if (direction == 1) {

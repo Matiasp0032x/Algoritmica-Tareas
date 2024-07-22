@@ -35,7 +35,7 @@ int main() {
     printf("Ingrese los elementos de la matriz:\n");
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < n; j++){
-            matriz[i][j] = rand()%100;
+            matriz[i][j] = rand()%2;
             printf("%2d ", matriz[i][j]);
         }
         printf("\n");
